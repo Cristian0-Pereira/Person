@@ -21,6 +21,3 @@ if (app.Environment.IsDevelopment())
 app.PersonRoutes();
 app.UseHttpsRedirection();
 app.Run();
-
-
-// 40 min

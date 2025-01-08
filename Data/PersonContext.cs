@@ -9,7 +9,7 @@ namespace Person.Data;
 
 public class PersonContext : DbContext
 {
-    public DbSet<PersonModel>? People { get; set; }
+    public DbSet<PersonModel> People { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
