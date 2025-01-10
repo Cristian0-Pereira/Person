@@ -8,4 +8,9 @@ public class PersonModel(string name)
     {
         Name = name;
     }
+
+    public void SetInactive()
+    {
+        Name = "Desativado";
+    }
 }

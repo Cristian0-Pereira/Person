@@ -45,8 +45,7 @@ public static class PersonRoute
         });
 
         // Rota PUT para atualizar uma pessoa existente
-        route.MapPut("{id:guid}",
-        async (Guid id, PersonRequest req, PersonContext context) =>
+        route.MapPut("{id:guid}", async (Guid id, PersonRequest req, PersonContext context) =>
         {
             var person = await context.People.FirstOrDefaultAsync(p => p.Id == id);
 
@@ -61,6 +60,24 @@ public static class PersonRoute
                 // Salvando as mudanças no banco de dados
                 await context.SaveChangesAsync();
                 return Results.Ok(person); // Retorna a pessoa atualizada
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem($"Erro ao atualizar a pessoa: {ex.Message}");
+            }
+        });
+
+        route.MapDelete("{id:guid}", async (Guid id, PersonContext context) =>
+        {
+            var person = await context.People.FirstOrDefaultAsync(p => p.Id == id);
+
+            person.SetInactive();
+
+            try
+            {
+                // Salvando as mudanças no banco de dados
+                await context.SaveChangesAsync();
+                return Results.Ok(person); 
             }
             catch (Exception ex)
             {
